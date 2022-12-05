@@ -1,17 +1,8 @@
 import {
   Container,
-  Heading,
-  Box,
-  Button,
-  Flex,
-  Spacer,
-  Image,
   Stack,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import Layout from "../components/layouts/article";
-import Paragraph from "../components/paragraph";
-import Section from "../components/section";
 import CenterLogo from "../components/center-logo";
 import AlphaPass from "../components/alpha-pass";
 import CelestialTales from "../components/celestial-tales";

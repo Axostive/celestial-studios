@@ -14,7 +14,6 @@ import {
   useColorModeValue,
   MenuDivider,
   Image,
-  Select,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { SiDiscord, SiTwitter } from "react-icons/si";

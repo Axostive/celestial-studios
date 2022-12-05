@@ -7,10 +7,8 @@ import {
   Button,
   Flex,
   Spacer,
-  Image,
 } from "@chakra-ui/react";
 import Paragraph from "../components/paragraph";
-import NextLink from "next/link";
 
 const CelestialBeasts = () => {
   return (
