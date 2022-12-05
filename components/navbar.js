@@ -14,30 +14,24 @@ import {
   useColorModeValue,
   MenuDivider,
   Image,
+  Select,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { SiDiscord, SiTwitter } from "react-icons/si";
+import Scroll from "react-scroll";
 
-const LinkItem = ({ href, path, target, children, ...props }) => {
-  const active = path === href;
-  const inactiveColor = useColorModeValue("gray200", "whiteAlpha.900");
-  return (
-    <NextLink href={href} passHref scroll={false}>
-      <Link
-        p={2}
-        bg={active ? "grassTeal" : undefined}
-        color={active ? "#202023" : inactiveColor}
-        target={target}
-        {...props}
-      >
-        {children}
-      </Link>
-    </NextLink>
-  );
-};
+const ScrollLink = Scroll.Link;
 
 const Navbar = (props) => {
   const { path } = props;
+
+  if (path == "/celestial-tales") {
+    var isCelestialTales = true;
+  } else {
+    var isCelestialTales = false;
+  }
+
+  console.log(path);
 
   return (
     <Box
@@ -46,7 +40,7 @@ const Navbar = (props) => {
       w="100%"
       bg={useColorModeValue("#0D1625", "#0D1625")}
       css={{ backdropFilter: "blur(10px)" }}
-      zIndex={2}
+      zIndex={3}
       {...props}
     >
       <Container
@@ -70,20 +64,78 @@ const Navbar = (props) => {
           flexGrow={1}
           mt={{ base: 4, md: 0 }}
         >
-          <LinkItem href="/" variant="nav-bar-item">
+          <Link
+            p={2}
+            href="/"
+            variant="nav-bar-item"
+            style={{ visibility: isCelestialTales ? "hidden" : "" }}
+          >
             Home
-          </LinkItem>
-          <LinkItem href="/collection" path={path} variant="nav-bar-item">
-            Collection
-          </LinkItem>
-          <LinkItem href="/comics" path={path} variant="nav-bar-item">
-            Comics
-          </LinkItem>
-          <LinkItem
+          </Link>
+
+          <Link
+            p={2}
+            variant="nav-bar-item"
+            style={{ visibility: isCelestialTales ? "hidden" : "" }}
+          >
+            <ScrollLink
+              spy={true}
+              smooth={true}
+              duration={500}
+              offset={-130}
+              to="angels-devils"
+            >
+              Collection
+            </ScrollLink>
+          </Link>
+
+          <Link
+            variant="nav-bar-item"
+            style={{ visibility: isCelestialTales ? "hidden" : "visible" }}
+          >
+            <ScrollLink
+              smooth={true}
+              duration={500}
+              offset={-85}
+              to="celestial-tales"
+            >
+              Comics
+            </ScrollLink>
+          </Link>
+          {/*  <Menu>
+            <MenuButton variant="nav-bar-item">COMICS</MenuButton>
+            <MenuList>
+              <MenuItem>
+                <Link variant="nav-bar-item">
+                  <ScrollLink
+                    smooth={true}
+                    duration={500}
+                    offset={-85}
+                    to="celestial-tales"
+                  >
+                    Get me there!
+                  </ScrollLink>
+                </Link>
+              </MenuItem>
+              <MenuDivider />
+              <MenuItem>
+                <Link variant="nav-bar-item">
+                  <ScrollLink
+                    smooth={true}
+                    duration={500}
+                    offset={-85}
+                    to="celestial-tales"
+                  ></ScrollLink>
+                </Link>
+              </MenuItem>
+            </MenuList>
+          </Menu> */}
+          <Link
+            style={{ visibility: isCelestialTales ? "hidden" : "", gap: 4 }}
+            p={2}
             href="/"
             display="inline-flex"
             alignItems="center"
-            style={{ gap: 4 }}
             pl={2}
           >
             <Image
@@ -98,52 +150,73 @@ const Navbar = (props) => {
                 transform: "rotate(-20deg) scale(1.5)",
               }}
             />
-          </LinkItem>
-          <LinkItem href="/roadmap" path={path} variant="nav-bar-item">
-            Roadmap
-          </LinkItem>
-          <LinkItem href="/faq" path={path} variant="nav-bar-item">
-            Faq
-          </LinkItem>
-          <LinkItem
+          </Link>
+
+          <Link
+            p={2}
+            variant="nav-bar-item"
+            style={{ visibility: isCelestialTales ? "hidden" : "" }}
+          >
+            <ScrollLink smooth={true} duration={500} offset={-180} to="roadmap">
+              Roadmap
+            </ScrollLink>
+          </Link>
+
+          <Link
+            p={2}
+            variant="nav-bar-item"
+            style={{ visibility: isCelestialTales ? "hidden" : "" }}
+          >
+            <ScrollLink smooth={true} duration={500} offset={-60} to="faq">
+              Faq
+            </ScrollLink>
+          </Link>
+
+          <Link
+            style={{ visibility: isCelestialTales ? "hidden" : "", gap: 4 }}
             target="_blank"
-            href=""
+            href="https://twitter.com/AngelsDevilsNFT"
             path={path}
             display="inline-flex"
             alignItems="center"
-            style={{ gap: 4 }}
             pl={2}
           >
             <SiTwitter />
-          </LinkItem>
-          <LinkItem
+          </Link>
+          <Link
             target="_blank"
-            href=""
+            href="https://discord.gg/vg9JhQR66Y"
             path={path}
             display="inline-flex"
             alignItems="center"
-            style={{ gap: 4 }}
+            style={{
+              visibility: isCelestialTales ? "hidden" : "visible",
+              gap: 4,
+            }}
             pl={2}
           >
             <SiDiscord />
-          </LinkItem>
-          <LinkItem
+          </Link>
+          <Link
             target="_blank"
-            href=""
+            href="https://opensea.io/collection/angelsdevilsnft"
             path={path}
             display="inline-flex"
             alignItems="center"
-            style={{ gap: 4 }}
+            style={{ visibility: isCelestialTales ? "hidden" : "", gap: 4 }}
             pl={2}
           >
             <Image src="/images/opensea-logo.svg" width={25} height={25} />
-          </LinkItem>
+          </Link>
         </Stack>
 
         <Box flex={1} align="right">
-          {/*           <ThemeToggleButton />
-           */}
-          <Box ml={2} display={{ base: "inline-block", md: "none" }}>
+          {/* <ThemeToggleButton /> */}
+          <Box
+            ml={2}
+            display={{ base: "inline-block", md: "none" }}
+            style={{ visibility: isCelestialTales ? "hidden" : "" }}
+          >
             <Menu isLazy id="navbar-menu">
               <MenuButton
                 as={IconButton}
@@ -152,29 +225,85 @@ const Navbar = (props) => {
                 aria-label="Options"
               />
               <MenuList>
-                <NextLink href="/" passHref>
-                  <MenuItem as={Link}>Home</MenuItem>
+                <NextLink href="" passHref>
+                  <MenuItem as={Link}>
+                    <ScrollLink
+                      smooth={true}
+                      duration={500}
+                      offset={-60}
+                      to="logo"
+                    >
+                      Home
+                    </ScrollLink>
+                  </MenuItem>
                 </NextLink>
-                <NextLink href="/collection" passHref>
-                  <MenuItem as={Link}>Collection</MenuItem>
+                <NextLink href="" passHref>
+                  <MenuItem as={Link}>
+                    <ScrollLink
+                      smooth={true}
+                      duration={500}
+                      offset={0}
+                      to="angels-devils"
+                    >
+                      Collection
+                    </ScrollLink>
+                  </MenuItem>
                 </NextLink>
-                <NextLink href="/comics" passHref>
-                  <MenuItem as={Link}>Comics</MenuItem>
+                <NextLink href="" passHref>
+                  <MenuItem as={Link}>
+                    <ScrollLink
+                      smooth={true}
+                      duration={500}
+                      offset={-65}
+                      to="celestial-tales"
+                    >
+                      Comics
+                    </ScrollLink>
+                  </MenuItem>
                 </NextLink>
-                <NextLink href="/roadmap" passHref>
-                  <MenuItem as={Link}>Roadmap</MenuItem>
+                <NextLink href="" passHref>
+                  <MenuItem as={Link}>
+                    <ScrollLink
+                      smooth={true}
+                      duration={500}
+                      offset={-260}
+                      to="roadmap"
+                    >
+                      Roadmap
+                    </ScrollLink>
+                  </MenuItem>
                 </NextLink>
-                <NextLink href="/faq" passHref>
-                  <MenuItem as={Link}>FAQ</MenuItem>
+                <NextLink href="" passHref>
+                  <MenuItem as={Link}>
+                    <ScrollLink
+                      smooth={true}
+                      duration={500}
+                      offset={-60}
+                      to="faq"
+                    >
+                      FAQ
+                    </ScrollLink>
+                  </MenuItem>
                 </NextLink>
                 <MenuDivider />
-                <MenuItem icon={<SiTwitter />} as={Link} href="">
+                <MenuItem
+                  icon={<SiTwitter />}
+                  as={Link}
+                  href="https://twitter.com/AngelsDevilsNFT"
+                >
                   Twitter
                 </MenuItem>
-                <MenuItem icon={<SiDiscord />} as={Link} href="">
+                <MenuItem
+                  icon={<SiDiscord />}
+                  as={Link}
+                  href="https://discord.gg/vg9JhQR66Y"
+                >
                   Discord
                 </MenuItem>
-                <MenuItem as={Link} href="">
+                <MenuItem
+                  as={Link}
+                  href="https://opensea.io/collection/angelsdevilsnft"
+                >
                   <Image
                     src="/images/opensea-logo.svg"
                     width={15}

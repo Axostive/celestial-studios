@@ -22,7 +22,13 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.39.4",
     "react-icons": "^4.6.0",
+    "react-image-gallery": "^1.2.11",
     "react-modal-image": "^2.6.0",
-    "react-multi-carousel": "^2.8.2"
+    "react-multi-carousel": "^2.8.2",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.4.4",
+    "react-scroll": "^1.8.8",
+    "react-use-scroll-snap": "^0.0.4",
+    "scroll-snap": "^4.0.3"
   }
 }
